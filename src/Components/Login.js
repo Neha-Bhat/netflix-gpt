@@ -1,8 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { checkValidData } from '../utils/validate';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/slices/userSlice';
 const Login = () => {
 
   const [isSignIn, setIsSignIn] = useState(true)
@@ -12,6 +15,8 @@ const Login = () => {
   const emailRef = useRef(null);
   const pwdRef = useRef(null);
   const unameRef = useRef(null);
+
+  const dispatch = useDispatch()
 
   const toggleSignIn = () => {
     setIsSignIn(!isSignIn)
@@ -27,8 +32,21 @@ const Login = () => {
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
-    // ...
-    navigate('/browse')
+    updateProfile(auth.currentUser, {
+        displayName: unameRef.current.value, 
+        photoURL: "https://avatars.githubusercontent.com/u/45681122?v=4q-user/profile.jpg"
+      }).then(() => {
+        // Profile updated!
+        // ...
+        const {uid, email, displayName, photoURL} = auth.currentUser;
+        console.log(auth.currentUser)
+        dispatch(addUser({uid, email, displayName, photoURL}))
+        navigate('/browse')
+      }).catch((error) => {
+        // An error occurred
+        // ...
+        setErrorMessage(error.message)
+      });
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -57,6 +75,7 @@ const Login = () => {
 
   return (
     <div>
+        <Header />
         <div className='absolute'>
             <img src='https://assets.nflxext.com/ffe/siteui/vlv3/435e8bb8-7f1b-49cb-8da8-bff997124294/web/IN-en-20260511-TRIFECTA-perspective_ec39852e-0b48-4e8a-b415-dd8376cd83ce_large.jpg' alt='page background' />
         </div>

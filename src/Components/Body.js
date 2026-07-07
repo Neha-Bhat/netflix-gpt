@@ -23,11 +23,13 @@ const Body = () => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
+            console.log("auth state change")
         if (user) {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/auth.user
-            const {uid, email, displayName} = user;
-            dispatch(addUser(uid, email, displayName))
+            const {uid, email, displayName, photoURL} = user;
+            console.log(user)
+            dispatch(addUser({uid, email, displayName, photoURL}))
             
             // ...
         } else {
@@ -39,7 +41,7 @@ const Body = () => {
     }, [])
   return (
     <>
-        <Header />
+        {/* <Header /> */}
         <RouterProvider router={appRoute} />
     </>
   )
