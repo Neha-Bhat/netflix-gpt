@@ -2,15 +2,14 @@ import React, { useRef, useState } from 'react';
 import { checkValidData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/slices/userSlice';
+import { AUTH_BG, USER_AVATAR } from '../utils/constants';
 const Login = () => {
 
   const [isSignIn, setIsSignIn] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
-  const navigate = useNavigate()
 
   const emailRef = useRef(null);
   const pwdRef = useRef(null);
@@ -34,7 +33,7 @@ const Login = () => {
     const user = userCredential.user;
     updateProfile(auth.currentUser, {
         displayName: unameRef.current.value, 
-        photoURL: "https://avatars.githubusercontent.com/u/45681122?v=4q-user/profile.jpg"
+        photoURL: USER_AVATAR
       }).then(() => {
         // Profile updated!
         // ...
@@ -77,7 +76,7 @@ const Login = () => {
     <div>
         <Header />
         <div className='absolute'>
-            <img src='https://assets.nflxext.com/ffe/siteui/vlv3/435e8bb8-7f1b-49cb-8da8-bff997124294/web/IN-en-20260511-TRIFECTA-perspective_ec39852e-0b48-4e8a-b415-dd8376cd83ce_large.jpg' alt='page background' />
+            <img src={AUTH_BG} alt='page background' />
         </div>
         <form onSubmit={(e) => e.preventDefault()} className='absolute w-3/12 p-12 bg-black my-32 mx-auto right-0 left-0 text-white bg-opacity-80'>
             <h1 className='text-bold text-3xl py-4'>{isSignIn ? 'Sign In' : 'Sign Up'}</h1>
