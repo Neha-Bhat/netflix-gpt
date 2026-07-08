@@ -41,7 +41,7 @@ const Login = () => {
         const {uid, email, displayName, photoURL} = auth.currentUser;
         console.log(auth.currentUser)
         dispatch(addUser({uid, email, displayName, photoURL}))
-        navigate('/browse')
+        // navigate('/browse')
       }).catch((error) => {
         // An error occurred
         // ...
@@ -53,7 +53,7 @@ const Login = () => {
     const errorMessage = error.message;
     // ..
     setErrorMessage(`${errorCode} - ${errorMessage}`)
-    navigate('/')
+    // navigate('/')
   });
     } else {
       signInWithEmailAndPassword(auth, emailRef.current.value, pwdRef.current.value)
@@ -62,13 +62,13 @@ const Login = () => {
           const user = userCredential.user;
           // ...
           console.log(user)
-          navigate('/browse')
+          // navigate('/browse')
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(`${errorCode} - ${errorMessage}`)
-          navigate('/')
+          // navigate('/')
         });
     }
   }
