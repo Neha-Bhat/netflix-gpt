@@ -12,7 +12,7 @@ const Header = () => {
   const user = useSelector(store => store.user)
 
   useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             console.log("auth state change")
         if (user) {
             // User is signed in, see docs for a list of available properties
@@ -29,6 +29,7 @@ const Header = () => {
             navigate('/')
         }
         });
+        return () => unsubscribe() //cleaning up on component unmount
     }, [])
 
   const handleSignOut = () => {
