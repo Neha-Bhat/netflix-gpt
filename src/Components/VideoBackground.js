@@ -7,7 +7,7 @@ const VideoBackground = ({movieID}) => {
     useMovieTrailer(movieID)
   return (
     <div className='w-screen aspect-video'>
-        <iframe className='w-screen aspect-video' src={"https://www.youtube.com/embed/"+trailerVideo?.key+"?&autoplay=1&mute=1"} title="Trailer Video" referrerPolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe className='w-screen aspect-video' src={"https://www.youtube.com/embed/"+trailerVideo?.key+"?&autoplay=1&mute=1&control=0&cc_load_policy=0"} title="Trailer Video" referrerPolicy="strict-origin-when-cross-origin"></iframe>
     </div>
   )
 }

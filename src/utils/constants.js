@@ -5,3 +5,4 @@ export const API_OPTIONS = {
   method: 'GET',
   headers: {accept: 'application/json', Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YjgwNzlmZTQzM2RhNGNjZjQzNTdiODVmMTlhYjE5NSIsIm5iZiI6MTc4NDAwOTc2NS43MTYsInN1YiI6IjZhNTVkNDI1ZGIwOGJlYTNkNWMwZTgwOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tm3ehlvZ2mvPR8cY-8PCEnp9LBGyAb8pigGICCm9-Ic'}
 };
+export const IMG_CDN_URL = 'https://image.tmdb.org/t/p/w500'
