@@ -4,6 +4,7 @@ import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/slices/userSlice';
+import { toggleGptSearchView } from '../utils/slices/gptSlice';
 import { NETFLIX_LOGO } from '../utils/constants';
 
 const Header = () => {
@@ -39,15 +40,20 @@ const Header = () => {
       });
   }
 
+  const handleGPTSearchView = () => {
+    dispatch(toggleGptSearchView())
+  }
+
   return (
     <div className='absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between align-middle'>
         <img className='w-44' src={NETFLIX_LOGO} alt='logo' />
         {
           user && (
-            <div className='p-4 flex'>
-          <img className='w-8 h-8' alt='user icon' src={user?.photoURL} />
-          <span className='text-white font-bold' onClick={handleSignOut}>Sign Out</span>
-        </div>
+            <div className='p-4 flex gap-1'>
+              <button className='py-2 px-4 mx-4 bg-purple-800 text-white rounded-lg' onClick={handleGPTSearchView}>GPT Search</button>
+              <img className='w-8 h-8' alt='user icon' src={user?.photoURL} />
+              <span className='text-white font-bold' onClick={handleSignOut}>Sign Out</span>
+            </div>
           )
         }
     </div>
